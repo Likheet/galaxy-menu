@@ -9,17 +9,32 @@
     img  { max-width:100%; height:auto; margin:1rem 0; }
   </style>
 </head>
-<body>
-  <h1>Our Hotel Menu</h1>
+<body>  <h1>Our Hotel Menu</h1>
   <div id="menu"></div>
   <p>Scan the QR code to view on mobile.</p>
-  <script>
+  <div id="loading-status"></div>  <script>
     const container = document.getElementById('menu');
+    const loadingStatus = document.getElementById('loading-status');
+    let loadedImages = 0;
+    
     // change 14 below if you ever add/remove pages
     for (let i = 0; i < 14; i++) {
       const img = document.createElement('img');
-      img.src = `Galaxy Menu-images-${i}.png`;
+      // Use encodeURI to handle spaces in the filename
+      img.src = encodeURI(`images/Galaxy Menu-images-${i}.jpg`);
       img.alt = `Menu page ${i + 1}`;
+      
+      // Add error handling to detect loading issues
+      img.onerror = function() {
+        console.error(`Failed to load image: ${img.src}`);
+        loadingStatus.innerHTML += `<p style="color:red">Error loading: ${img.src}</p>`;
+      };
+      
+      img.onload = function() {
+        loadedImages++;
+        loadingStatus.innerHTML = `<p>Loaded ${loadedImages} of 14 images</p>`;
+      };
+      
       container.appendChild(img);
     }
   </script>
