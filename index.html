@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Our Hotel Menu</title>
+  <style>
+    body { margin:0; padding:1rem; font-family:sans-serif; text-align:center; }
+    img  { max-width:100%; height:auto; margin:1rem 0; }
+  </style>
+</head>
+<body>
+  <h1>Our Hotel Menu</h1>
+  <div id="menu"></div>
+  <p>Scan the QR code to view on mobile.</p>
+  <script>
+    const container = document.getElementById('menu');
+    // change 14 below if you ever add/remove pages
+    for (let i = 0; i < 14; i++) {
+      const img = document.createElement('img');
+      img.src = `Galaxy Menu-images-${i}.png`;
+      img.alt = `Menu page ${i + 1}`;
+      container.appendChild(img);
+    }
+  </script>
+</body>
+</html>
