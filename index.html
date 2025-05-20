@@ -4,15 +4,72 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Our Hotel Menu</title>
-  <style>
-    body { margin:0; padding:1rem; font-family:sans-serif; text-align:center; }
-    img  { max-width:100%; height:auto; margin:1rem 0; }
+  <style>    body {
+      margin: 0;
+      padding: 1rem;
+      font-family: system-ui, -apple-system, sans-serif;
+      text-align: center;
+      background-color: #fcf7f4;
+      line-height: 1.6;
+    }
+    #menu {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0.25rem;
+      transition: all 0.3s ease;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 0.5rem 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+    }
+    #loading-status {
+      margin-top: 1rem;
+      color: #666;
+    }
+    p {
+      color: #555;
+      font-size: 1.1rem;
+    }
+    #back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.7);
+      color: #a88b7c;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity 0.2s, background 0.2s;
+      z-index: 1001;
+      display: none;
+    }
+    #back-to-top:hover {
+      opacity: 1;
+      background: #f5ede6;
+    }
+    @media (max-width: 600px) {
+      #back-to-top {
+        bottom: 16px;
+        right: 16px;
+        width: 32px;
+        height: 32px;
+        font-size: 1.2rem;
+      }
+    }
   </style>
 </head>
-<body>  <h1>Our Hotel Menu</h1>
+<body>
   <div id="menu"></div>
-  <p>Scan the QR code to view on mobile.</p>
-  <div id="loading-status"></div>  <script>
+  <button id="back-to-top" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#9650;</button>
+  <script>
     const container = document.getElementById('menu');
     const loadingStatus = document.getElementById('loading-status');
     let loadedImages = 0;
@@ -37,6 +94,16 @@
       
       container.appendChild(img);
     }
+    
+    // Show/hide back to top button on scroll
+    const backToTopBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 300) {
+        backToTopBtn.style.display = 'block';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    });
   </script>
 </body>
 </html>
